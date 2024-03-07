@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Inventario_2.Models.AsientoContable>
+
+@{
+    ViewData["Title"] = "Listado de asientos sin contabilizar";
+}
+
+<style>
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn-contabilizar {
+        display: inline-flex;
+        align-items: center;
+        height: 34px;
+        margin-left: 5px;
+    }
+</style>
+
+<div>
+    <h1>Listado de asientos sin contabilizar</h1>
+
+    <form asp-controller="AsientoContables" asp-action="Index" method="get">
+        <p style="display: flex; align-items: center;">
+            <label style="margin-right: 5px;">Filtrar:</label>
+            <input type="text" name="buscar" class="form-control" style="width: 300px; height: 34px;" />
+            <button type="submit" class="btn btn-secondary btn-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                </svg>
+                Buscar
+            </button>
+        </p>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Cuenta Débito
+                </th>
+                <th>
+                    Cuenta Crédito
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuentaDb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuentaCr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monto)
+                    </td>
+                    <td>
+                        <a asp-action="Contabilizar" class="btn btn-warning btn-contabilizar" asp-route-id="@item.IdMovimiento">Contabilizar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

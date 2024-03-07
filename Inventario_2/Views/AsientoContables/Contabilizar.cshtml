@@ -1,0 +1,57 @@
+﻿@model Inventario_2.Models.AsientoContable
+
+@{
+    ViewData["Title"] = "Contabilizar";
+}
+
+<style>
+    /* Personaliza el ancho del formulario */
+    form {
+        width: 50%;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    button {
+        margin-right: 5px;
+    }
+</style>
+
+<h1>Contabilizar registro</h1>
+
+<form asp-controller="AsientoContables" asp-action="Contabilizar" method="post">
+    <div class="form-group">
+        <label asp-for="Descripcion">Descripción</label>
+        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label asp-for="Auxiliar">Auxiliar</label>
+        @Html.TextBoxFor(model => model.Auxiliar, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label asp-for="CuentaDb">Cuenta Débito</label>
+        @Html.TextBoxFor(model => model.CuentaDb, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label asp-for="CuentaCr">Cuenta Crédito</label>
+        @Html.TextBoxFor(model => model.CuentaCr, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label asp-for="Monto">Monto</label>
+        @Html.TextBoxFor(model => model.Monto, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+
+    <div>
+        <button class="btn btn-success" type="submit">Contabilizar</button>
+        <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+    </div>
+</form>
